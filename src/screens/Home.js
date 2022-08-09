@@ -3,8 +3,9 @@ import { View,
   TouchableOpacity,
   FlatList, 
   StyleSheet,
-  Modal} from 'react-native'
-import React, {useState} from 'react'
+  Modal,
+Image} from 'react-native'
+import React, {useState,useLayoutEffect} from 'react'
 import QouteCard from '../components/QouteCard'
 import NotesCard  from '../components/NotesCard'
 import withObservables from '@nozbe/with-observables'
@@ -17,6 +18,39 @@ const Home = ({navigation, notes}) => {
   // deleteAll()
   const [modalVisible, setModalVisible] = useState(false);
   const [note, setNote] = useState(null);
+  useLayoutEffect(() => {
+    // console.log("working")
+    navigation.setOptions({
+  headerShown:true,
+  headerStyle: {
+    backgroundColor: Colors.PURPLE,
+  },
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
+      headerRight: () => (
+        <TouchableOpacity
+        onPress={searchContent}
+        >
+        <Image
+        source={require('../../assests/search.png')}
+        style={{
+          width: 35,
+          height: 35,
+          marginRight:15
+        }}
+      />
+      </TouchableOpacity>
+      ),
+    });
+  }, []);
+ const searchContent=()=>{
+  navigation.navigate('Search');
+ }
+
+
+
   const openNote = (note) => {
 
     navigation.navigate('UpdateNote', { note });
@@ -97,7 +131,7 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     backgroundColor: "white",
-    borderRadius: 25,
+    borderRadius: 5,
     padding: 35,
     alignItems: "center",
     shadowColor: "#000",
@@ -110,7 +144,7 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   button: {
-    borderRadius: 15,
+    borderRadius: 5,
     padding: 10,
     elevation: 2
   },

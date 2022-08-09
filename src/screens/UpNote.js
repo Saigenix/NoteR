@@ -1,7 +1,8 @@
 import { View, Text, TextInput, TouchableOpacity,
      StyleSheet,
-ScrollView} from 'react-native'
-import React, { useState, useEffect } from 'react';
+ScrollView,Image,BackHandler} from 'react-native'
+import React, { useState, useEffect, useLayoutEffect,useCallback,useRef} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import Colors from '../../assests/Colours';
 
 
@@ -11,28 +12,91 @@ const UpNote = ({navigation, route}) => {
   const [note, setNote] = useState(route.params.note);
   const [title, setTitle] = useState(note?.title ?? '');
   const [body, setBody] = useState(note?.content ?? '');
-
+  let titleRef = useRef(null);
+  let handler;
+  useLayoutEffect(() => {
+    // console.log("working")
+    navigation.setOptions({
+   headerShown:true,
+   headerStyle: {
+    backgroundColor: Colors.PURPLE,
+   
+  },
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+    color: '#fff',
+   },
+      headerRight: () => (
+        <TouchableOpacity
+        onPress={onPressCreatePost}
+        >
+        <Image
+        source={require('../../assests/save.png')}
+        style={{
+          width: 35,
+          height: 35,
+        }}
+      />
+      </TouchableOpacity>
+      ),
+    });
+  }, [title, body]);
 
   const onPressCreatePost = async () => {
-    if (title == '' || body == '') {
+    if (title == '' || body == '' || title.length >=30) {
+      if(title == '' || body == ''){
         alert('Please fill required fields.');
+      }else{
+        alert('Title is Too long');
+      }
+        
         return;
-
-    } 
+    }
     note.updateNote(title, body);
     navigation.goBack();
     return;
    
     // navigation.goBack();
 };
+const onBackPress = () => {
+    if (title == '' || body == '') {
+        //console.log('back press');
+        navigation.navigate('home');
+        // navigation.goBack();
+        return true;
 
+    }
+   
+        onPressCreatePost();
+        return true;
 
+}
+useFocusEffect(
+    React.useCallback(() => {
+      // console.log('Screen was focused');
+    titleRef.current.focus();
+    // bodyRef.current.clear();
+       handler = BackHandler.addEventListener('hardwareBackPress',onBackPress);
+      // Do something when the screen is focused
+      return () => {
+        //console.log('Screen was unfocused');
+        handler.remove();
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
+useEffect(() => {
+    handler = BackHandler.addEventListener('hardwareBackPress',onBackPress);
+},[title,body]);
 
   return (
     <ScrollView style={styles.container}>
             <TextInput
                 style={styles.input}
                 value={title}
+                ref={titleRef}
                 onChangeText={(text) => setTitle(text)}
                 placeholder='Title'
                 placeholderTextColor='grey'
@@ -47,15 +111,6 @@ const UpNote = ({navigation, route}) => {
                 multiline={true}
                 scrollEnabled={true}
             />
-            <TouchableOpacity
-                delayPressIn={0}
-                style={styles.button}
-                onPress={onPressCreatePost}
-                >
-                <Text style={styles.buttonLabel}>
-                    save
-                </Text>
-            </TouchableOpacity>
         </ScrollView>
   )
 }
@@ -91,11 +146,10 @@ const styles = StyleSheet.create({
       borderRadius: 6,
   },
   txt : {
-    fontSize: 16,
-    fontStyle: 'italic',
-    height: 400,
+    fontSize: 19,
+    height: 490,
     textAlignVertical: 'top',
-
+    borderBottomWidth: 0,
 
   }
 });

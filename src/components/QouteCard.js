@@ -35,7 +35,9 @@ const QouteCard = () => {
       <View style={Styles.card}>
         {loding ? (
           <View>
-            <Text style={Styles.txt}>Stay Hungry, Stay Foolish</Text>
+            <Text style={Styles.txt}>
+            Stay Hungry, Stay Foolish
+            </Text>
             <ActivityIndicator size="small" color="#0000ff" />
           </View>
         ) : (
@@ -58,20 +60,20 @@ const QouteCard = () => {
 
 const Styles = StyleSheet.create({
   view: {
-    // flex: 1,
+    //flex: 1,
     alignItems: 'center',
-    width: '100%',
-    height: 160,
-    backgroundColor: Colors.bg,
+     width: '100%',
+    //maxHeight: 250,
+     backgroundColor: Colors.bg,
   },
   card: {
-    flex: 1,
+   // flex: 1,
     padding: 15,
     margin: 15,
     backgroundColor: Colors.bg,
     
-    maxHeight: 140,
-    width: "90%",
+   // maxHeight: 140,
+    width: "98%",
     borderWidth:2,
     borderColor: "white",
     
@@ -83,9 +85,9 @@ const Styles = StyleSheet.create({
     alignSelf: 'center',
   },
   imgreload: {
-    flex: 1,
-    top:5,
-    bottom:70,
+    //flex: 1,
+    top:-20,
+    bottom:60,
     height: 30,
     width: 30,
     position: 'absolute',
