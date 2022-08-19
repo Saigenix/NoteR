@@ -28,7 +28,7 @@ const TaskChecker = () => {
       startInLoadingState={true} 
       ignoreSslError={true} 
       containerStyle = {{ width: Dimensions.get('window').width, height: Dimensions.get('window').height}} 
-      source={{ uri: 'https://www.opemic.com/p/work-checker.html'}}
+      source={{ uri: 'https://saigenix.github.io/work-checker/'}}
       onNavigationStateChange={navState => {webView.current.canGoBack = navState.canGoBack}} />
     );
 }
