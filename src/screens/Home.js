@@ -49,7 +49,7 @@ const Home = ({navigation, notes}) => {
   navigation.navigate('Search');
  }
 
-
+// rahul seen this 
 
   const openNote = (note) => {
 
