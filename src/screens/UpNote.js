@@ -1,6 +1,6 @@
 import { View, Text, TextInput, TouchableOpacity,
      StyleSheet,
-ScrollView,Image,BackHandler} from 'react-native'
+ScrollView,Image,BackHandler, Share} from 'react-native'
 import React, { useState, useEffect, useLayoutEffect,useCallback,useRef} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 import Colors from '../../assests/Colours';
@@ -28,6 +28,21 @@ const UpNote = ({navigation, route}) => {
     color: '#fff',
    },
       headerRight: () => (
+        <View style={{
+        flexDirection:'row',
+        justifyContent:"flex-end",
+        alignItems:"center",
+        }}>
+        <TouchableOpacity onPress={onShare}>
+        <Image
+        source={require('../../assests/share.png')}
+        style={{
+          width: 30,
+          height: 30,
+          margin:5
+        }}
+      />
+        </TouchableOpacity>
         <TouchableOpacity
         onPress={onPressCreatePost}
         >
@@ -36,13 +51,34 @@ const UpNote = ({navigation, route}) => {
         style={{
           width: 35,
           height: 35,
+          marginRight:8,
+          marginLeft:10
         }}
       />
       </TouchableOpacity>
+      </View>
       ),
     });
   }, [title, body]);
-
+  const onShare = async () => {
+    try {
+      const result = Share.share({
+        title:title,
+        message: `${title}  ${body}  ~NoteR`
+  });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   const onPressCreatePost = async () => {
     if (title == '' || body == '' || title.length >=30) {
       if(title == '' || body == ''){

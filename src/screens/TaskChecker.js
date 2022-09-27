@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {Dimensions,BackHandler, Platform} from 'react-native';
+import {Dimensions,BackHandler, Platform,View} from 'react-native';
 import { WebView } from 'react-native-webview';
 
 const TaskChecker = () => {
@@ -23,6 +23,7 @@ const TaskChecker = () => {
     return false;
 }
     return (
+      <View style={{flex:1,marginBottom:40}}>
       <WebView 
       ref={webView}
       startInLoadingState={true} 
@@ -30,6 +31,7 @@ const TaskChecker = () => {
       containerStyle = {{ width: Dimensions.get('window').width, height: Dimensions.get('window').height}} 
       source={{ uri: 'https://saigenix.github.io/work-checker/'}}
       onNavigationStateChange={navState => {webView.current.canGoBack = navState.canGoBack}} />
+    </View>
     );
 }
 

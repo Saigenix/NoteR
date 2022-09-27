@@ -49,8 +49,6 @@ const Home = ({navigation, notes}) => {
   navigation.navigate('Search');
  }
 
-// rahul seen this 
-
   const openNote = (note) => {
 
     navigation.navigate('UpdateNote', { note });
@@ -82,7 +80,7 @@ const Home = ({navigation, notes}) => {
 };
   return (
 
-    <View style={{backgroundColor: Colors.bg, flex:1}}>
+    <View style={{backgroundColor: Colors.bg, flex:1,marginBottom:35 }}>
     <QouteCard/> 
     <FlatList
     data={notes}
