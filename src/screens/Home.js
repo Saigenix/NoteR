@@ -22,6 +22,8 @@ const Home = ({navigation, notes}) => {
     // console.log("working")
     navigation.setOptions({
   headerShown:true,
+  //tabBarVisible : false,
+ 
   headerStyle: {
     backgroundColor: Colors.PURPLE,
   },

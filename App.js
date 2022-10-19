@@ -14,24 +14,9 @@ import Search from './src/screens/Search';
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
 
-const HomeStackScreen = () => {
+const TabNavigatorScreen = () => {
   return (
-    <HomeStack.Navigator screenOptions={{ title: 'NoteR',
-    headerShown: false,
-    }}>
-      <HomeStack.Screen name="home" component={Home}/>
-      <HomeStack.Screen name="UpdateNote" component={UpNote} />
-      <HomeStack.Screen name="Search" component={Search}/>
-
-    </HomeStack.Navigator>
-  );
-}
-
-const App = () => {
-  return (
-    
-    <NavigationContainer>
-      <Tab.Navigator
+    <Tab.Navigator
       screenOptions={{
         
          BarActiveTintColor: 'white',
@@ -48,10 +33,11 @@ const App = () => {
       
       >
       <Tab.Screen 
-      name="HomeStackScreen"
-      component={HomeStackScreen}
+      name="Home"
+      component={Home}
       options={{ title: 'NoteR',
       headerShown: false,
+      
           headerStyle: {
             backgroundColor: Colors.PURPLE,
            
@@ -71,6 +57,7 @@ const App = () => {
        component={CreateNote} 
        options={{ 
          title: 'Create Note',
+         tabBarStyle: {display: 'none'},
          headerStyle: {
             backgroundColor: Colors.PURPLE,
           },
@@ -99,6 +86,21 @@ const App = () => {
         }}
       />
       </Tab.Navigator>
+  );
+}
+
+const App = () => {
+  return (
+    
+    <NavigationContainer>
+      <HomeStack.Navigator screenOptions={{ title: 'NoteR',
+    headerShown: false,
+    }}>
+      <HomeStack.Screen name="TabNavigatorScreen" component={TabNavigatorScreen} />
+      <HomeStack.Screen name="UpdateNote" component={UpNote} />
+      <HomeStack.Screen name="Search" component={Search}/>
+
+    </HomeStack.Navigator>
      </NavigationContainer> 
      );
 }

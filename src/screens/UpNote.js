@@ -17,7 +17,10 @@ const UpNote = ({navigation, route}) => {
   useLayoutEffect(() => {
     // console.log("working")
     navigation.setOptions({
+   
    headerShown:true,
+   tabBarStyle: {display: 'none'},
+  //  NavbarShown:false,
    headerStyle: {
     backgroundColor: Colors.PURPLE,
    
@@ -156,6 +159,7 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 20,
       backgroundColor: Colors.bg,
+      flexGrow:1
   },
   button: {
       borderColor: '#6200EA',
@@ -182,8 +186,11 @@ const styles = StyleSheet.create({
       borderRadius: 6,
   },
   txt : {
+    // position: 'absolute',
     fontSize: 19,
-    height: 490,
+    height: 500,
+    // height: '100%',
+    // marginTop:90,
     textAlignVertical: 'top',
     borderBottomWidth: 0,
 

@@ -45,15 +45,15 @@ const CreateNote = ({navigation, route}) => {
     }
    
     Createnote(title, body);
-    navigation.navigate('home');
+    navigation.navigate('Home');
     return;
    // navigation.goBack();
 };
 const onBackPress = () => {
     if (title == '' || body == '') {
         //console.log('back press');
-        navigation.navigate('home');
-        // navigation.goBack();
+        // navigation.navigate('TabNavigatorScreen');
+        navigation.goBack();
         return true;
 
     }
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   txt : {
     fontSize: 19,
-    height: 490,
+    height: 500,
     textAlignVertical: 'top',
     borderBottomWidth: 0,
 
