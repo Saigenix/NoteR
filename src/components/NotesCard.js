@@ -29,7 +29,7 @@ const NotesCard = ({ note, index,  onPress,onLongPress}) => {
 //   let colour = randColor();
 //   let upcolour = foreground(colour);
 
-
+// 
   return (
     
     <View style={Styles.view}>

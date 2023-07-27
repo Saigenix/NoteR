@@ -11,6 +11,10 @@ import NotesCard  from '../components/NotesCard'
 import withObservables from '@nozbe/with-observables'
 import { observenotes , deleteAll } from '../DB/DAO/NoteDAO'
 import Colors from '../../assests/Colours'
+import Animated,{SlideInUp} from 'react-native-reanimated'
+
+
+
 
 const Home = ({navigation, notes}) => {
  
@@ -85,7 +89,7 @@ const Home = ({navigation, notes}) => {
     <View style={{backgroundColor: Colors.bg, flex:1,marginBottom:35 }}>
     <QouteCard/> 
     <FlatList
-    data={notes}
+    data={notes.reverse()}
     keyExtractor={(_, index) => index.toString()}
     renderItem={renderItem}
     ListEmptyComponent={_emptyComponent} /> 
